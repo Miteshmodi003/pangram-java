@@ -1,100 +1,26 @@
-import java.io.BufferedReader;
-import java.io.IOException;
-import java.io.InputStreamReader;
+package pangram;
+
+import java.util.Scanner;
 
 public class Pangram {
-	
 
 	public static void main(String[] args) {
+		// TODO Auto-generated method stub
 		System.out.print("Enter a string: ");
+		Scanner input = new Scanner(System.in);
 
-		String str = "";
-		BufferedReader br;
-		
-		br = new BufferedReader(new InputStreamReader(System.in));
+		String str = input.nextLine();
 
-		try {
-			str = br.readLine().toLowerCase();
-			str = matchAndReplace(str, '.', ' ');
-			str = matchAndReplace(str, ',', ' ');
-			str = matchAndReplace(str, ';', ' ');
-			str = matchAndReplace(str, ':', ' ');
-			str = matchAndReplace(str, '!', ' ');
-			str = matchAndReplace(str, '?', ' ');
-			str = matchAndReplace(str, '\'', ' ');
+		System.out.println("-------------------------");
 
-			System.out.println("--------------------------");
-
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
-
-		if(isPangram(str)){
-			System.out.println("String is a Pangram.");
+		if (isPangramm(str)) {
+			System.out.println("Given string is a Pangram");
 		} else {
-			System.out.println("String is not a Pangram.");
+			System.out.println("Given string is not a Pangram");
 		}
-
+		input.close();
 	}
 
-	private static boolean isPangram(String line) {
-		int duplicate = 0;
-
-		/*
-		 * initial value should be false in case character array length does not
-		 * equal to 26
-		 */
-		boolean result = false;
-
-		String l = line + " is a pangram which has 26 distinct alphabets with no duplicates and no numbers!";
-
-		/* convert a string into an array of characters */
-		char[] charArray = line.toCharArray();
-
-		/*
-		 * verify if the string length is exactly 26 which is the first
-		 * condition
-		 */
-		if (charArray.length == 26) {
-
-			/* loop (iterate) through entire char array using for loop */
-			for (int i = 0; i < charArray.length; i++) {
-
-				/*
-				 * if any character at given index is not alphabet, return false
-				 * instantly!
-				 */
-				if (!Character.isLetter(charArray[i])) {
-					result = false;
-					return result;
-				}
-				/*
-				 * nested for loop to compare character at i index against
-				 * characters at index j by iterating through each of them
-				 */
-				for (int j = 0; j < charArray.length; j++) {
-
-					/*
-					 * verifies that if i and j are not same AND there aren't
-					 * any duplicate characters
-					 */
-					if (i != j && charArray[i] == charArray[j]) {
-						duplicate++;
-						if (duplicate > 1) {
-							result = false;
-							return result;
-						}
-					}
-				}
-			}
-		} else {
-			result = false;
-			return result;
-		}
-		
-		return true;
-	}
-	
 	private static String matchAndReplace(String str, char lookFor, char replaceWith) {
 		char[] c = str.toCharArray();
 		for (int i = 0; i < c.length; i++) {
@@ -105,5 +31,28 @@ public class Pangram {
 		str = c.toString().valueOf(c);
 		str = str.replaceAll(" ", "");
 		return str;
+	}
+
+	private static boolean isPangramm(String str) {
+		str = str.toLowerCase();
+		str = matchAndReplace(str, '.', ' ');
+		str = matchAndReplace(str, ',', ' ');
+		str = matchAndReplace(str, ';', ' ');
+		str = matchAndReplace(str, ':', ' ');
+		str = matchAndReplace(str, '!', ' ');
+		str = matchAndReplace(str, '?', ' ');
+		str = matchAndReplace(str, '\'', ' ');
+
+		boolean result = true;
+
+		for (int i = 97; i <= 122; i++) {
+			if (str.contains(Character.toString((char) i)))
+				result = true;
+			else {
+				result = false;
+				return result;
+			}
+		}
+		return result;
 	}
 }
