@@ -1,11 +1,6 @@
 # Pangram Java
 
-There are two java files as mentioned below, both have their own criteria but Pangram_CoreJava file is precisely as we talked during the interview that should not allow any duplicates alphabets or numbers in a given string. 
-
-# Pangram.java : 
-1. It declares a sentence as Pangrams that utilizes every letter of English alphabet at least once.
-2. It allows duplicate alphabets and numbers, but verifies if the given string contains those distinct 26 alphabets at least once.
-3. Basically, it allows a string which has a length greater than 26, but not less than 26.
+Pangram_CoreJava file is precisely as we talked during the interview that should not allow any duplicates alphabets or numbers in a given string. 
 
 # Pangram_CoreJava.java : 
 1. It ensures that the given string does not contain any number AND any duplicate alphabet character.
